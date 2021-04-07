@@ -41,7 +41,6 @@ module.exports = {
       },
       coins: {
         type: Sequelize.INTEGER,
-        allowNull: false,
         defaultValue: 0,
       },
       isCanceled: {
