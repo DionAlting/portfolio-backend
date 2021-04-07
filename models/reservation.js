@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
       firstName: { type: DataTypes.STRING, allowNull: false },
       lastName: { type: DataTypes.STRING, allowNull: false },
       comment: { type: DataTypes.STRING },
-      coins: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
+      coins: { type: DataTypes.INTEGER, defaultValue: 0 },
       isCanceled: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
