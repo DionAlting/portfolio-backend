@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "userId",
         as: "attendee",
       });
-      user.hasOne(models.studyAssociation);
+      user.hasMany(models.studyAssociation);
     }
   }
   user.init(
