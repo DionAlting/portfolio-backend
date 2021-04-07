@@ -8,7 +8,9 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      reservation.belongsTo(models.reservationDate);
+      reservation.belongsTo(models.user);
+      reservation.hasMany(models.stamp);
     }
   }
   reservation.init(
@@ -27,12 +29,10 @@ module.exports = (sequelize, DataTypes) => {
       coins: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
       isCanceled: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
         defaultValue: false,
       },
       isCheckedOut: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
         defaultValue: false,
       },
     },

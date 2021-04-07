@@ -11,10 +11,22 @@ module.exports = {
       songId: {
         type: Sequelize.UUID,
         allowNull: false,
+        references: {
+          model: "songRequests",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL",
       },
       userId: {
         type: Sequelize.UUID,
         allowNull: false,
+        references: {
+          model: "users",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL",
       },
       createdAt: {
         allowNull: false,

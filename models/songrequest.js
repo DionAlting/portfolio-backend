@@ -9,6 +9,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      songRequest.belongsTo(models.user, { as: "requester" });
+      songRequest.belongsToMany(models.user, {
+        through: "songVotes",
+        foreignKey: "songId",
+        as: "voter",
+      });
     }
   }
   songRequest.init(

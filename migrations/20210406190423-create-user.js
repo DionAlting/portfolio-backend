@@ -33,22 +33,25 @@ module.exports = {
         type: Sequelize.STRING,
       },
       studyAssociation: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         allowNull: false,
+        references: {
+          model: "users",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL",
       },
       isAdmin: {
         type: Sequelize.BOOLEAN,
-        allowNull: false,
         defaultValue: false,
       },
       isStudyAssociation: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
+        type: Sequelize.BOOLEAN,
         defaultValue: false,
       },
       isBlocked: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
+        type: Sequelize.BOOLEAN,
         defaultValue: false,
       },
       createdAt: {

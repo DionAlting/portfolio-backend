@@ -9,6 +9,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      stamp.belongsTo(models.user);
+      stamp.belongsTo(models.reservation);
+      stamp.belongsTo(models.event);
     }
   }
   stamp.init(

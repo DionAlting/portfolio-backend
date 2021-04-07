@@ -9,6 +9,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      songVote.belongsTo(models.songRequest);
+      songVote.belongsTo(models.user);
     }
   }
   songVote.init(

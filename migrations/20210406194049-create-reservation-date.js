@@ -23,12 +23,10 @@ module.exports = {
       },
       isStampable: {
         type: Sequelize.BOOLEAN,
-        allowNull: false,
         defaultValue: false,
       },
       isActive: {
         type: Sequelize.BOOLEAN,
-        allowNull: false,
         defaultValue: true,
       },
       createdAt: {

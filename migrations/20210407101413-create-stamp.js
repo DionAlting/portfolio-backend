@@ -11,9 +11,21 @@ module.exports = {
       userId: {
         type: Sequelize.UUID,
         allowNull: false,
+        references: {
+          model: "users",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL",
       },
       eventId: {
         type: Sequelize.UUID,
+        references: {
+          model: "events",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL",
       },
       reservationId: {
         type: Sequelize.UUID,

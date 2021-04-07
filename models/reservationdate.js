@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      reservationDate.hasMany(models.reservation);
     }
   }
   reservationDate.init(
@@ -24,12 +25,10 @@ module.exports = (sequelize, DataTypes) => {
       maxPerParty: { type: DataTypes.INTEGER, allowNull: false },
       isStampable: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
         defaultValue: false,
       },
       isActive: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
         defaultValue: true,
       },
     },

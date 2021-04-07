@@ -8,7 +8,23 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      user.hasMany(models.reservation);
+      user.hasMany(models.stamp);
+
+      user.hasMany(models.songRequest, { as: "requester" });
+      user.belongsToMany(models.songRequest, {
+        through: "songVotes",
+        foreignKey: "userId",
+        as: "voter",
+      });
+
+      user.hasMany(models.event, { as: "owner" });
+      user.belongsToMany(models.event, {
+        through: "eventAttendees",
+        foreignKey: "userId",
+        as: "attendee",
+      });
+      user.hasOne(models.studyAssociation);
     }
   }
   user.init(
@@ -25,20 +41,17 @@ module.exports = (sequelize, DataTypes) => {
       lastName: { type: DataTypes.STRING, allowNull: false },
       displayName: { type: DataTypes.STRING, allowNull: false, unique: true },
       avatar: { type: DataTypes.STRING },
-      studyAssociation: { type: DataTypes.INTEGER, allowNull: false },
+      studyAssociation: { type: DataTypes.UUID, allowNull: false },
       isAdmin: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
         defaultValue: false,
       },
       isStudyAssociation: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
         defaultValue: false,
       },
       isBlocked: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
         defaultValue: false,
       },
     },

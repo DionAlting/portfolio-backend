@@ -11,6 +11,12 @@ module.exports = {
       userId: {
         type: Sequelize.UUID,
         allowNull: false,
+        references: {
+          model: "users",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL",
       },
       title: {
         type: Sequelize.STRING,
@@ -37,7 +43,6 @@ module.exports = {
       },
       isStampable: {
         type: Sequelize.BOOLEAN,
-        allowNull: false,
         defaultValue: false,
       },
       stampCode: {

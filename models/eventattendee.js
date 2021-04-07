@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      eventAttendee.belongsTo(models.event);
     }
   }
   eventAttendee.init(
