@@ -24,12 +24,10 @@ module.exports = (sequelize, DataTypes) => {
       maxPerParty: { type: DataTypes.INTEGER, allowNull: false },
       isStampable: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
         defaultValue: false,
       },
       isActive: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
         defaultValue: true,
       },
     },

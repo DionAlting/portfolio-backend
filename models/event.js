@@ -28,7 +28,6 @@ module.exports = (sequelize, DataTypes) => {
       eventImage: DataTypes.STRING,
       isStampable: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
         defaultValue: false,
       },
       stampCode: {

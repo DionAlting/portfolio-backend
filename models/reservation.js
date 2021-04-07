@@ -27,12 +27,10 @@ module.exports = (sequelize, DataTypes) => {
       coins: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
       isCanceled: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
         defaultValue: false,
       },
       isCheckedOut: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
         defaultValue: false,
       },
     },
