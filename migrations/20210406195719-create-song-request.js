@@ -11,6 +11,12 @@ module.exports = {
       userId: {
         type: Sequelize.UUID,
         allowNull: false,
+        references: {
+          model: "users",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL",
       },
       artist: {
         type: Sequelize.STRING,
