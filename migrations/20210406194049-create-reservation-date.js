@@ -3,10 +3,10 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable("reservationDates", {
       id: {
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.literal("uuid_generate_v4()"),
         allowNull: false,
         primaryKey: true,
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
       },
       date: {
         type: Sequelize.DATE,
