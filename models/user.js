@@ -10,14 +10,21 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       user.hasMany(models.reservation);
       user.hasMany(models.stamp);
-      user.hasMany(models.songRequest);
-      user.hasMany(models.songVote);
+
+      user.hasMany(models.songRequest, { as: "requester" });
+      user.belongsToMany(models.songRequest, {
+        through: "songVotes",
+        foreignKey: "userId",
+        as: "voter",
+      });
+
       user.hasMany(models.event, { as: "owner" });
       user.belongsToMany(models.event, {
         through: "eventAttendees",
         foreignKey: "userId",
         as: "attendee",
       });
+      user.hasOne(models.studyAssociation);
     }
   }
   user.init(
