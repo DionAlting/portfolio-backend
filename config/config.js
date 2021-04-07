@@ -1,5 +1,6 @@
 require("dotenv").config();
 module.exports = {
+  SALT_ROUNDS: process.env.SALT_ROUNDS,
   development: {
     url: process.env.ELEPHANT_SQL,
     dialect: "postgres",

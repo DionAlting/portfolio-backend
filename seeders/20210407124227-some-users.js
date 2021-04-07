@@ -1,7 +1,6 @@
 "use strict";
 const bcrypt = require("bcrypt");
-const { SALT_ROUNDS } = require("../config/constants");
-console.log(SALT_ROUNDS);
+const { SALT_ROUNDS } = require("../config/config.js");
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert(
