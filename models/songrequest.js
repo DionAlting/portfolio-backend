@@ -22,7 +22,6 @@ module.exports = (sequelize, DataTypes) => {
       userId: { type: DataTypes.UUID, allowNull: false },
       artist: { type: DataTypes.STRING, allowNull: false },
       title: { type: DataTypes.STRING, allowNull: false },
-      votes: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
     },
     {
       sequelize,
