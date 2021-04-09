@@ -32,9 +32,9 @@ module.exports = {
       avatar: {
         type: Sequelize.STRING,
       },
-      studyAssociation: {
+      studyAssociationId: {
         type: Sequelize.UUID,
-        allowNull: false,
+        defaultValue: "5060edbc-ae36-40ba-9b78-e6809d9cda6e",
         references: {
           model: "studyAssociations",
           key: "id",

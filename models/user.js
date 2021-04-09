@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "userId",
         as: "attendee",
       });
-      user.hasMany(models.studyAssociation);
+      user.belongsTo(models.studyAssociation);
     }
   }
   user.init(
@@ -41,7 +41,10 @@ module.exports = (sequelize, DataTypes) => {
       lastName: { type: DataTypes.STRING, allowNull: false },
       displayName: { type: DataTypes.STRING, allowNull: false, unique: true },
       avatar: { type: DataTypes.STRING },
-      studyAssociation: { type: DataTypes.UUID, allowNull: false },
+      studyAssociationId: {
+        type: DataTypes.UUID,
+        defaultValue: "5060edbc-ae36-40ba-9b78-e6809d9cda6e",
+      },
       isAdmin: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
