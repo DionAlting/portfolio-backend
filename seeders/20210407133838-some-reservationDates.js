@@ -49,6 +49,17 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          id: "8a824bd6-4bef-4253-85fe-56d78ee4260a",
+          date: "2021-04-13 17:30:42.905+00",
+          maxSeats: 20,
+          maxPerParty: 2,
+          bookedSeats: 20,
+          isStampable: true,
+          isActive: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       {}
     );
