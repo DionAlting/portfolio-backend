@@ -97,4 +97,32 @@ router.post("/:dateId", authMiddleware, async (req, res) => {
   }
 });
 
+router.put("/:reservationId", authMiddleware, async (req, res) => {
+  try {
+    const { reservationId } = req.params;
+    const { id } = req.user;
+
+    const reservation = await Reservation.findByPk(reservationId);
+
+    if (!reservation) {
+      return res.status(404).send({ message: "Reservation does not exist" });
+    }
+
+    if (!reservation.userId === id) {
+      return res.status(401).send({ message: "UnAuthorized" });
+    }
+
+    const updatedReservation = await reservation.update({
+      isCanceled: !reservation.isCanceled,
+    });
+
+    return res.status(200).send({
+      message: "Reservation canceled successfully!",
+      updatedReservation,
+    });
+  } catch (error) {
+    return res.status(400).send({ message: `Something went wrong, sorry` });
+  }
+});
+
 module.exports = router;
