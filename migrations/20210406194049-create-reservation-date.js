@@ -21,6 +21,9 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
+      bookedSeats: {
+        type: Sequelize.INTEGER,
+      },
       isStampable: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
