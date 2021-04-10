@@ -8,7 +8,7 @@ const ReservationDate = require("../models/").reservationDate;
 
 const router = new Router();
 
-router.get("/", async (req, res) => {
+router.get("/dates", async (req, res) => {
   try {
     const allReservationDates = await ReservationDate.findAll({
       attributes: {
@@ -75,7 +75,7 @@ router.post("/:dateId", authMiddleware, async (req, res) => {
           { userId: id },
         ],
       },
-      attributes: { exclude: ["createdAt", "updatedAt"] },
+      attributes: { exclude: ["createdAt", "updatedAt", "coins"] },
       include: [
         {
           model: ReservationDate,
@@ -122,6 +122,40 @@ router.put("/:reservationId", authMiddleware, async (req, res) => {
     });
   } catch (error) {
     return res.status(400).send({ message: `Something went wrong, sorry` });
+  }
+});
+
+router.get("/reservations", authMiddleware, async (req, res) => {
+  try {
+    const { id } = req.user;
+
+    const allReservations = await Reservation.findAll({
+      where: {
+        [Op.and]: [
+          { isCanceled: false },
+          { isCheckedOut: false },
+          { userId: id },
+        ],
+      },
+      attributes: { exclude: ["createdAt", "updatedAt", "coins"] },
+      include: [
+        {
+          model: ReservationDate,
+          attributes: ["date"],
+        },
+      ],
+      order: [[ReservationDate, "date", "ASC"]],
+    });
+
+    if (!allReservations) {
+      return res.status(404).send({
+        message: "No reservations found",
+      });
+    }
+    return res.status(200).send(allReservations);
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send({ message: "Something went wrong, sorry" });
   }
 });
 
