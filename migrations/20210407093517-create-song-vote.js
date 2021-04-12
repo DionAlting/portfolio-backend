@@ -8,7 +8,7 @@ module.exports = {
         allowNull: false,
         primaryKey: true,
       },
-      songId: {
+      songRequestId: {
         type: Sequelize.UUID,
         allowNull: false,
         references: {

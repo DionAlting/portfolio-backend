@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       user.hasMany(models.reservation);
       user.hasMany(models.stamp);
 
-      user.hasMany(models.songRequest, { as: "requester" });
+      user.hasMany(models.songRequest, { foreignKey: "userId" });
       user.belongsToMany(models.songRequest, {
         through: "songVotes",
         foreignKey: "userId",
