@@ -104,4 +104,37 @@ router.put("/:songRequestId/upvote", authMiddleware, async (req, res) => {
   }
 });
 
+router.put("/:songRequestId/downvote", authMiddleware, async (req, res) => {
+  try {
+    const { songRequestId } = req.params;
+    const { dateId } = req.body;
+    const { id, isAdmin } = req.user;
+
+    const requestedSong = await SongRequests.findByPk(songRequestId);
+
+    if (!requestedSong) {
+      return res.status(404).send({ message: "Song does not exist" });
+    }
+    const hasUserVoted = await SongVotes.findOne({
+      where: {
+        [Op.and]: [{ songRequestId: requestedSong.id }, { userId: id }],
+      },
+    });
+
+    if (hasUserVoted && !isAdmin) {
+      return res
+        .status(400)
+        .send({ message: "You already voted on this song" });
+    }
+
+    await requestedSong.decrement("voteCount");
+
+    return res.status(200).send({
+      message: "Song downvoted successfully!",
+    });
+  } catch (error) {
+    return res.status(400).send({ message: "Something went wrong, sorry" });
+  }
+});
+
 module.exports = router;
