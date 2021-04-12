@@ -34,4 +34,41 @@ router.get("/requests", async (req, res) => {
   }
 });
 
+router.post("/requests", authMiddleware, async (req, res) => {
+  try {
+    const { title, artist } = req.body;
+    const { id } = req.user;
+
+    const newRequest = await SongRequests.create({
+      userId: id,
+      title,
+      artist,
+    });
+
+    await SongVotes.create({
+      songRequestId: newRequest.id,
+      userId: id,
+    });
+
+    const newSongRequest = await SongRequests.findByPk(newRequest.id, {
+      include: [
+        {
+          model: User,
+          as: "votes",
+          attributes: [["id", "userId"]],
+          through: { attributes: [] },
+        },
+      ],
+    });
+
+    return res.status(200).send({
+      message: "Song request created successfully!",
+      newSongRequest,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send({ message: "Something went wrong, sorry" });
+  }
+});
+
 module.exports = router;
