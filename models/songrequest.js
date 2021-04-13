@@ -2,18 +2,15 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class songRequest extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
-      songRequest.belongsTo(models.user, { as: "requester" });
+      // songRequest.belongsTo(models.user, {
+      //   as: "requester",
+      //   foreignKey: "userId",
+      // });
       songRequest.belongsToMany(models.user, {
         through: "songVotes",
-        foreignKey: "songId",
-        as: "voter",
+        foreignKey: "songRequestId",
+        as: "votes",
       });
     }
   }
@@ -28,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
       userId: { type: DataTypes.UUID, allowNull: false },
       artist: { type: DataTypes.STRING, allowNull: false },
       title: { type: DataTypes.STRING, allowNull: false },
+      voteCount: { type: DataTypes.INTEGER, defaultValue: 1, allowNull: false },
     },
     {
       sequelize,

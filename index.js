@@ -6,6 +6,7 @@ require("dotenv").config();
 
 const authRouter = require("./routes/auth");
 const reserveRouter = require("./routes/reserve");
+const jukeboxRouter = require("./routes/jukebox");
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -17,5 +18,6 @@ app.use(express.json());
 
 app.use("/", authRouter);
 app.use("/reserve", reserveRouter);
+app.use("/jukebox", jukeboxRouter);
 
 app.listen(PORT, () => console.log(`Server started at port: ${PORT}`));
