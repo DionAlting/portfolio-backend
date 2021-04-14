@@ -7,6 +7,7 @@ const authMiddleware = require("../auth/middleware").auth;
 
 const User = require("../models/").user;
 const StudyAssociation = require("../models/").studyAssociation;
+const Stamp = require("../models/").stamp;
 
 const router = new Router();
 
@@ -72,6 +73,34 @@ router.patch("/:userId/changepassword", authMiddleware, async (req, res) => {
     });
 
     return res.status(200).send({ message: "Password changed successfully!" });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send({ message: "Something went wrong, sorry" });
+  }
+});
+
+router.get("/:userId/stamps", authMiddleware, async (req, res) => {
+  try {
+    const { id } = req.user;
+    const { userId } = req.params;
+
+    const userById = await User.findByPk(userId);
+
+    if (!userById) {
+      return res.status(404).send({
+        message: "User not found",
+      });
+    }
+
+    if (!userById.id === id) {
+      return res.status(401).send({ message: "Unauthorized" });
+    }
+
+    const stamps = await Stamp.findAll({
+      where: { userId: userById.id },
+    });
+
+    return res.status(200).send({ message: "Ok", stamps });
   } catch (error) {
     console.log(error);
     return res.status(400).send({ message: "Something went wrong, sorry" });
