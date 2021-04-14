@@ -101,7 +101,7 @@ router.post("/signup", async (req, res) => {
       include: [
         {
           model: StudyAssociation,
-          attributes: ["name"],
+          attributes: ["name", "id"],
         },
       ],
     });

@@ -17,7 +17,7 @@ const auth = async (req, res, next) => {
         include: [
           {
             model: StudyAssociation,
-            attributes: ["name"],
+            attributes: ["name", "id"],
           },
         ],
       });
