@@ -8,6 +8,7 @@ const authRouter = require("./routes/auth");
 const userRouter = require("./routes/user");
 const reserveRouter = require("./routes/reserve");
 const jukeboxRouter = require("./routes/jukebox");
+const studyAssocRouter = require("./routes/studyAssociation");
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -21,5 +22,6 @@ app.use("/", authRouter);
 app.use("/user", userRouter);
 app.use("/reserve", reserveRouter);
 app.use("/jukebox", jukeboxRouter);
+app.use("/studyassociation", studyAssocRouter);
 
 app.listen(PORT, () => console.log(`Server started at port: ${PORT}`));
