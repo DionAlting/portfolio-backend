@@ -8,27 +8,33 @@ const router = new Router();
 
 router.get("/", async (req, res) => {
   try {
-    const allRequests = await Event.findAll({
+    const allEvents = await Event.findAll({
       include: [
         {
           model: User,
-          attributes: ["displayName", "id"],
+          attributes: ["id"],
           as: "creator",
           include: {
             model: StudyAssociation,
             attributes: ["id", "name", "color"],
           },
         },
+        {
+          model: User,
+          as: "attendees",
+          attributes: [["id", "userId"]],
+          through: { attributes: [] },
+        },
       ],
       attributes: { exclude: ["stampCode", "createdAt", "updatedAt"] },
     });
 
-    if (!allRequests) {
+    if (!allEvents) {
       return res.status(404).send({
-        message: "No reservation dates found",
+        message: "No events found",
       });
     }
-    return res.status(200).send(allRequests);
+    return res.status(200).send({ allEvents });
   } catch (error) {
     console.log(error);
     return res.status(400).send({ message: "Something went wrong, sorry" });
