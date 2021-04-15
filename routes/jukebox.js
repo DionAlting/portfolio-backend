@@ -96,6 +96,7 @@ router.put("/:songRequestId/upvote", authMiddleware, async (req, res) => {
     }
 
     await requestedSong.increment("voteCount");
+    await SongVotes.create({ songRequestId: requestedSong.id, userId: id });
 
     return res.status(200).send({
       message: "Song upvoted successfully!",
