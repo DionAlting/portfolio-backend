@@ -69,4 +69,31 @@ router.put(
   }
 );
 
+router.put(
+  "/:reservationId/cancel",
+  authMiddleware,
+  isAdmin,
+  async (req, res) => {
+    try {
+      const { reservationId } = req.params;
+      const reservation = await Reservation.findByPk(reservationId);
+
+      if (!reservation) {
+        return res.status(404).send({
+          message: "Reservation not found",
+        });
+      }
+
+      await reservation.update({ isCheckedOut: !reservation.isCanceled });
+
+      return res
+        .status(200)
+        .send({ message: "Reservation canceled successfully" });
+    } catch (error) {
+      console.log(error);
+      return res.status(400).send({ message: "Something went wrong, sorry" });
+    }
+  }
+);
+
 module.exports = router;
