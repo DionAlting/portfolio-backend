@@ -36,4 +36,37 @@ router.get("/reservations", authMiddleware, isAdmin, async (req, res) => {
   }
 });
 
+router.put(
+  "/:reservationId/checkout",
+  authMiddleware,
+  isAdmin,
+  async (req, res) => {
+    try {
+      const { reservationId } = req.params;
+      const { id } = req.user;
+      const reservation = await Reservation.findByPk(reservationId);
+
+      if (!reservation) {
+        return res.status(404).send({
+          message: "Reservation not found",
+        });
+      }
+      const reservationDate = await ReservationDate.findByPk(
+        reservation.dateId
+      );
+
+      if (reservationDate.isStampable) {
+        await Stamp.create({ userId: id, reservationId: reservation.id });
+      }
+
+      await reservation.update({ isCheckedOut: !reservation.isCheckedOut });
+
+      return res.status(200).send({ message: "User checked out successfully" });
+    } catch (error) {
+      console.log(error);
+      return res.status(400).send({ message: "Something went wrong, sorry" });
+    }
+  }
+);
+
 module.exports = router;
