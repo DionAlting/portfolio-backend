@@ -26,7 +26,7 @@ router.get("/reservations", authMiddleware, isAdmin, async (req, res) => {
 
     if (!reservationDates) {
       return res.status(404).send({
-        message: "No events found",
+        message: "No reservations found",
       });
     }
     return res.status(200).send({ reservationDates });
