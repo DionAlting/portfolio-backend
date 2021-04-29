@@ -18,6 +18,7 @@ router.get("/reservations", authMiddleware, isAdmin, async (req, res) => {
       include: [
         {
           model: Reservation,
+          required: false,
           where: {
             [Op.and]: [{ isCanceled: false }, { isCheckedOut: false }],
           },
@@ -157,5 +158,23 @@ router.put(
     }
   }
 );
+
+router.post("/dates", authMiddleware, isAdmin, async (req, res) => {
+  try {
+    const date = await ReservationDate.findOne({
+      where: { date: req.body.values.date },
+    });
+    if (!date) {
+      await ReservationDate.create(req.body.values);
+
+      return res.status(200).send({ message: "Date added successfully" });
+    } else {
+      return res.status(400).send({ message: "Date already exists" });
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send({ message: "Something went wrong, sorry" });
+  }
+});
 
 module.exports = router;
