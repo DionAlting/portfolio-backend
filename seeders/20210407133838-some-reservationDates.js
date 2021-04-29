@@ -10,7 +10,7 @@ module.exports = {
           date: "2021-04-08 02:14:29.288+00",
           maxSeats: 20,
           maxPerParty: 2,
-          bookedSeats: 0,
+          bookedSeats: 2,
           isStampable: true,
           isActive: true,
           createdAt: new Date(),
