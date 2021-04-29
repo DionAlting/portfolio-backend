@@ -6,3 +6,6 @@
 .env.development
 .env.production
 .env.test
+
+/testRequests
+test.js

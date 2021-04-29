@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       date: { type: DataTypes.DATE, allowNull: false, unique: true },
       maxSeats: { type: DataTypes.INTEGER, allowNull: false },
       maxPerParty: { type: DataTypes.INTEGER, allowNull: false },
-      bookedSeats: DataTypes.INTEGER,
+      bookedSeats: { type: DataTypes.INTEGER, defaultValue: 0 },
       isStampable: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,

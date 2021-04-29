@@ -30,8 +30,8 @@ module.exports = {
         {
           dateId: "a6a0d925-e00a-4535-8c96-78dfd2dcaa8a",
           userId: "c674135c-82d9-4774-ac64-1fa812298ae2",
-          firstName: "Guest 1",
-          lastName: "Again other day",
+          firstName: "Guest1",
+          lastName: "lastname",
           comment: "PILS",
           isCanceled: false,
           isCheckedOut: false,
