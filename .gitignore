@@ -1,1 +1,11 @@
+# Dependency directories
 /node_modules
+
+# dotenv environment variables file
+.env
+.env.development
+.env.production
+.env.test
+
+/testRequests
+test.js
