@@ -1,5 +1,6 @@
 const User = require("../models").user;
 const StudyAssociation = require("../models").studyAssociation;
+const Stamp = require("../models/").stamp;
 const { toData } = require("./jwt");
 
 const auth = async (req, res, next) => {
@@ -18,6 +19,9 @@ const auth = async (req, res, next) => {
           {
             model: StudyAssociation,
             attributes: ["name", "id"],
+          },
+          {
+            model: Stamp,
           },
         ],
       });
