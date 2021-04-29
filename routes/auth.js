@@ -5,6 +5,7 @@ const authMiddleware = require("../auth/middleware").auth;
 const User = require("../models/").user;
 const StudyAssociation = require("../models/").studyAssociation;
 const Reservation = require("../models/").reservation;
+const Stamp = require("../models/").stamp;
 const { SALT_ROUNDS } = require("../config/config.js");
 
 const Joi = require("joi");
@@ -43,6 +44,9 @@ router.post("/login", async (req, res, next) => {
         {
           model: StudyAssociation,
           attributes: ["name"],
+        },
+        {
+          model: Stamp,
         },
       ],
     });
